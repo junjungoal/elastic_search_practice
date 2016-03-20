@@ -1,8 +1,27 @@
 <h1>レストラン検索</h1>
 
-<ul>
-  <% @restaurants.each do |r| %>
-    <li><%= r.name %>　（都道府県: <%= r.prefecture.name %>、カテゴリ: <%= r.category.name %>）</li>
-  <% end %>
-</ul>
+<!-- 検索フォーム -->
+<%= form_tag root_path, method: :get, enforce_utf8: false do %>
+  <div class="form-group">
+    <%= search_field_tag :query, params[:query], class: 'form-control', placeholder: '店名、場所、カテゴリ' %>
+  </div>
+  <button type="submit" class="btn btn-default">検索</button>
+<% end %>
+
+<br>
+
+<!-- 検索結果の表示 -->
+<div class="col-xs-9">
+  <div id="results">
+    <% @restaurants.each do |restaurant| %>
+      <hr />
+      <div class="result">
+        <h4><%= restaurant.name %>（<%= restaurant.name_kana %>）</h4>
+        <p class="text-muted">
+          <small>都道府県: <%= restaurant.description %></small>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
 

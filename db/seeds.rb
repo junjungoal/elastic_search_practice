@@ -1,41 +1,34 @@
 ActiveRecord::Base.transaction do
   # すべてのレコードを削除する
-  [Category, Prefecture, Restaurant].each(&:delete_all)
+  Restaurant.all.each do |restaurant|
+    restaurant.destroy
+  end
 
-  # カテゴリの作成(3件)
-  teisyoku = Category.create!(name: '定食',      name_kana: 'ていしょく')
-  italian = Category.create!(name: 'イタリアン', name_kana: 'いたりあん')
-  izakaya = Category.create!(name: '居酒屋',    name_kana: 'いざかや')
-
-  # 都道府県の作成(2件)
-  tokyo = Prefecture.create!(name: '東京都')
-  kanagawa = Prefecture.create!(name: '神奈川県')
-
-  # レストラン作成(各カテゴリ, 都道府県の掛け算で6件)
   Restaurant.create!([
     {
       name: '松屋', name_kana: 'まつや', zip: '240-0113', address: '三浦郡葉山町堀内24-3',
-      prefecture: tokyo, category: teisyoku, closed: false
+      description: "松屋では定番の牛めし、カレー、その他丼メニューから、各種焼肉定食、ハンバーグや期間限定メニューなどもラインナップ。 また、朝定食や多彩なサイドメニューも充実させながら、お客様の健康で豊かな食生活を応援しています。",  closed: false
     },
     {
       name: 'ラ・マーレ・ド・茶屋', name_kana: 'らまーれどちゃや', zip: '142-0111', address: '港区六本木1-1-1',
-      prefecture: kanagawa, category: teisyoku, closed: false
+      description: "１Ｆ～Ｂａｒ＆Ｃａｆｅ～ 単品のお食事のメニューやパティシエ特製のケーキセットをご用意しております。 お昼にはサンドイッチやパスタ・ハヤシライス・ステーキなどのお得なランチセットもございます。 ※ご予約は承っておりませんのでご了承ください。 ◇２Ｆ◇～Restaurant～ 旬の素材を使ったコース料理やアラカルトをご用意しております。 ラ・マーレ風ブイヤベースや地元葉山の葉山牛などお楽しみ頂けます。 ※ご予約を承っておりますので、お気軽にお問合せ下さい。", closed: false
     },
     {
       name: 'レストラン シェ・リュイ', name_kana: 'しぇりゅい', zip: '150-0033', address: '渋谷区猿楽町11-11',
-      prefecture: tokyo, category: italian, closed: false
+      description: "焼きたてのパンの包みからこぼれる、香ばしいかおり。 まだぬくもりのある袋をかかえながら、家に帰る道を歩いていると、 誰でも幸せになるのではないでしょうか。", closed: false
     },
     {
       name: 'スパゲティ　ハシヤ', name_kana: 'はしや', zip: '162-0023', address: '三浦1-11',
-      prefecture: kanagawa, category: italian, closed: true
+      description: "こだわり抜いたハシヤの和風スパゲッティ。 一度食べたら忘れられないそんな味を茹でたての麺", closed: true
     },
     {
       name: '牛角', name_kana: 'ぎゅうかく', zip: '130-0033', address: '池袋3-33',
-      prefecture: tokyo, category: izakaya, closed: false
+      description: "牛角はジャズの流れるおしゃれな雰囲気の中で、元気、活気、気遣いのあるサービスを提供し、美味しい焼肉が普段使いでお腹いっぱい食べられる、女性だけでも気軽にお越しいただけるお店です。
+", closed: false
     },
     {
       name: '沖縄そば やんばる', name_kana: 'おきなわそばやんばる', zip: '231-0011', address: '西区横浜1-11',
-      prefecture: kanagawa, category: izakaya, closed: true
+      description: "新宿・渋谷で本格沖縄料理や泡盛を楽しめる「沖縄ふるさと伝統料理やんばる」。渋谷店ではライブイベント等もおこなっております", closed: true
     }
   ])
 end

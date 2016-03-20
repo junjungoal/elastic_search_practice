@@ -11,31 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319103545) do
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "name_kana",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "prefectures", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
+ActiveRecord::Schema.define(version: 20160319103350) do
 
   create_table "restaurants", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "name_kana",     limit: 255
-    t.integer  "prefecture_id", limit: 4
-    t.string   "zip",           limit: 255
-    t.string   "address",       limit: 255
-    t.integer  "category_id",   limit: 4
+    t.string   "name",        limit: 255
+    t.string   "name_kana",   limit: 255
+    t.string   "description", limit: 255
+    t.string   "zip",         limit: 255
+    t.string   "address",     limit: 255
     t.boolean  "closed"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

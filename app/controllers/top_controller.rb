@@ -1,5 +1,5 @@
 class TopController < ApplicationController
   def index
-    @restaurants = Restaurant.all.includes(:prefecture, :category)
+    @restaurants = Restaurant.search(params[:query])
   end
 end
