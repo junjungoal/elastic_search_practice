@@ -4,9 +4,6 @@ class Restaurant < ActiveRecord::Base
   after_save :index_update
   after_destroy :index_remove
 
-  belongs_to :category, touch: true
-  belongs_to :prefecture, touch: true
-
    settings do
     mappings dynamic: 'false' do # デフォルトでマッピングが自動作成されるがそれを無効にする
       indexes :name, analyzer: :kuromoji
