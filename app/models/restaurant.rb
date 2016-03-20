@@ -1,6 +1,6 @@
 class Restaurant < ActiveRecord::Base
 
-  def self.search(query)
+  def self.search(keyword)
 
   end
 end
