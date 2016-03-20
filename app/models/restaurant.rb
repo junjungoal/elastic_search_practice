@@ -11,11 +11,7 @@ class Restaurant < ActiveRecord::Base
 
       indexes :zip
       indexes :address, analyzer: :kuromoji
-
-      indexes :closed, type: 'boolean'
       indexes :description, analyzer: :kuromoji
-
-      indexes :created_at, type: 'date', format: 'date_time'
     end
   end
  
@@ -29,13 +25,11 @@ class Restaurant < ActiveRecord::Base
     self.index.remove self
   end
 
-  def self.search(query)
+  def self.search(keyword)
     tire.search(load: true) do
       query do
-        boolean do
-          should { string query } 
-        end
-      end if query.present?
+        string keyword
+      end if keyword.present?
     end
   end
 end
